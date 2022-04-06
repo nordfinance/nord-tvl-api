@@ -1,0 +1,54 @@
+{
+  "contractName": "NordStakingWithUnboundingDurationAndFixedApy",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "getUserData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "stakeToken",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rewards",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "lastUpdateTime",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct NordStakingWithUnboundingDurationAndFixedApy.UserData",
+          "name": "user",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
