@@ -1,0 +1,7 @@
+# Dependency directory
+node_modules
+
+# Truffle build directory
+.DS_Store
+
+.env*

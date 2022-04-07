@@ -1,0 +1,50 @@
+service: nord
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+  - serverless-deployment-bucket
+
+custom:
+  defaultStage: nord-tvl-api
+  currentStage: ${opt:stage, self:custom.defaultStage}
+
+  serverless-offline:
+    useChildProcesses: true
+  basePath: ''
+  dynamodb:
+    stages:
+      - local
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  profile: serverless
+  stage: ${opt:stage, 'local'}
+
+  deploymentBucket:
+    name: ${self:custom.currentStage}-deployment-nord.finance
+    serverSideEncryption: AES256
+
+functions:
+  total-value-locked:
+    handler: services/tvl/vault/handler.handler
+    timeout: 60
+    events:
+      - http:
+          path: /tvl/statistics
+          method: get
+          cors: true
+  total-value-locked-user:
+    handler: services/tvl/user/handler.handler
+    timeout: 60
+    events:
+      - http:
+          path: /tvl/user/statistics
+          method: get
+          cors: true
