@@ -326,10 +326,16 @@ const getTvlStatistics = async () => {
     let {stakingTvl, lpStakingTvl} = await getStakingTvl(nordCurrentPrice);
 
     let totalTvl = (savingsVaultsTvl.totalSavings) + (advisoryVaultsTvl.totalAdvisory) + ((stakingTvl.totalStaking)*nordCurrentPrice) + lpStakingTvl.totalLpStaking + ((stakingTvl.totalKridaStakingTvlPolygon)*kridaCurrentPrice);
+    var ethereumTvl = (savingsVaultsTvl.ethereum) + (advisoryVaultsTvl.ethereum) + ((stakingTvl.ethereum) * nordCurrentPrice) + (lpStakingTvl.ethereum);
+    var polygonTvl = (savingsVaultsTvl.polygon) + (advisoryVaultsTvl.polygon) + ((stakingTvl.polygon) * nordCurrentPrice) + ((stakingTvl.totalKridaStakingTvlPolygon) * kridaCurrentPrice) + (lpStakingTvl.polygon);
+    var avalancheTvl = (savingsVaultsTvl.avalanche) + (advisoryVaultsTvl.avalanche) + ((stakingTvl.avalanche) * nordCurrentPrice) + (lpStakingTvl.avalanche);
 
     let tvlStatistics = {
         'tvl': {
-            'totalTvl': totalTvl,
+            'totalTvl':totalTvl,
+            'ethereum':ethereumTvl,
+            'polygon':polygonTvl,
+            'avalanche':avalancheTvl,
             'savings':savingsVaultsTvl,
             'advisory':advisoryVaultsTvl,
             'staking':stakingTvl,
